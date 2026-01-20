@@ -9,64 +9,62 @@ export default function CardList() {
     - handle loading, busy, and error states
     - style as a grid UI */
 
-const [cards, setCards] = useState([]);
-const [error, setError] = useState(null);
-const [loading, setLoading] = useState(true);
-const [busy, setBusy] = useState(false);
-
-async function load() {
-  try {
-    const data = await getCards();
-    setCards(data);
-  
-} catch (error) {
-    console.error("Error loading cards:", error);
-    setError("Failed to load cards.");
-} finally{
-  setLoading(false);
-}
-}
 
 
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
-useEffect(() => {
-    load();
-}, []);
-
-
-async function handleDelete(card) {
-
-    setBusy(true);
+  async function load() {
+    setLoading(true);
     try {
-      //delete from backend
-       const res = await deleteCard(card.id);
-        if (res.ok) throw new Error(`HTTP ${res.status}`);
-
-      //remove from local state
-        setCards(prevCards => prevCards.filter(c => c.id !== card.id));
+      const data = await getCards();
+      setCards(data);
     } catch (error) {
-        console.error("Error deleting card:", error);
-        setError("Failed to delete card.");
+      console.error("Failed to load cards", error);
+      setError("Failed to load cards");
     } finally {
-        setBusy(false);
+      setLoading(false);
     }
   }
-  return <main>
-    <div>
-      {
-        cards.map(card => (
-          <Card 
-          key={card.id} 
-          card={card} 
-          onDelete={async () => {
-          await deleteCard(card.id); 
-          await load();
-          }}
-        busy={loading}  
-        disabled = {busy}
-        />
-        ))
-      }
-    </div>
-  </main>;
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function handleDelete(card) {
+    setBusy(true);
+    setError("");
+    try {
+      // delete from backend
+      const res = await deleteCard(card.id);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      // remove from local state
+      setCards((prevCards) => prevCards.filter((c) => c.id !== card.id));
+    } catch (error) {
+      console.error("Failed to delete card", error);
+      setError("Failed to delete card");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <main>
+      <div>
+        {cards.map((card) => (
+          <Card
+            key={card.id}
+            card={card}
+            onDelete={handleDelete}
+            busy={loading}
+            s
+            disabled={busy}
+          />
+        ))}
+      </div>
+    </main>
+  );
 }
