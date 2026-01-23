@@ -13,7 +13,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cards" element={<CardList />} />
-        <Route path="/cards/new" element={<AddCard />} />
         <Route path="/cards/add" element={<AddCard />} />
         <Route path="/cards/:cardId/edit" element={<EditCard />} />
         {/* TODO: Complete the routes */}
