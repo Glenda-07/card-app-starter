@@ -5,5 +5,16 @@ export default function Home() {
     - display instructions
     - link to Cards page
     - style as a landing page */
+
+
+   
+    <div className="container">
+        {/* <Navbar /> */}
+      <h1>Home Page</h1>
+      <p>
+        If 
+      </p>
+    </div>
+
   return <main></main>;
 }

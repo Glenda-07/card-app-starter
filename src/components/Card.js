@@ -8,6 +8,7 @@ export default function Card({ card, onDelete, busy }) {
     - delete button calling onDelete with the card object
     - style as a card UI */
 
+
   return (
     <div>
       <img src={card.card_pic} alt={card.card_name} />

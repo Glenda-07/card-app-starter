@@ -10,8 +10,8 @@ export default function CardForm({
   /* TODO: Complete the CardForm component 
   - display form inputs for card_name and card_pic
   - display error message
-  - display submit button 
-  - handle form submission 
+  - display submit button
+  - handle form submission
   - style as a form UI */
 
   function handleSubmit(event) {
@@ -29,8 +29,10 @@ export default function CardForm({
           <input type="text" name="card_pic" value={values.card_pic} onChange={onChange} disabled={busy} />
         </label>
       <button type="submit" disabled={busy}>
-        {submitText || "Submit"}
+        Submit
       </button>
 
   </form>;
 }
+ 
+ 
