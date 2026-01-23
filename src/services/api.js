@@ -27,9 +27,26 @@ export function addCard(card) {
   // TODO: implement POST /addcard
 }
 
-export function updateCard(id, card) {
-  // TODO: implement PUT /updatecard/:id
+export async function updateCard(card) {
+  const res = await fetch(`${API_URL}/editcard`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      card_id: card.id,          
+      card_name: card.card_name,
+      card_pic: card.card_pic,
+    }),
+  });
+
+  if (!res.ok) {
+    const msg = await res.text();
+    throw new Error(`Failed to update card: ${res.status} ${msg}`);
+  }
+
+  return res.json();
 }
+
+
 
 export function deleteCard(id) {
   // TODO: implement DELETE /deletecard/:id
