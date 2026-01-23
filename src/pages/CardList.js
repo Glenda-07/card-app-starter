@@ -58,7 +58,6 @@ export default function CardList() {
             card={card}
             onDelete={handleDelete}
             busy={loading}
-            s
             disabled={busy}
           />
         ))}

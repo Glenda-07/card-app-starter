@@ -23,9 +23,16 @@ export async function getCards() {
   return res.json();
 }
 
-export function addCard(card) {
-  // TODO: implement POST /addcard
+export async function addCard(card) {
+  const res = await fetch(`${API_URL}/addcard`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(card),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
 }
+
 
 export function updateCard(id, card) {
   // TODO: implement PUT /updatecard/:id
