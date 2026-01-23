@@ -34,7 +34,6 @@ export default function AddCard() {
     }
   }
 
-  
   return (
     <main>
       <h1>Add Card</h1>
