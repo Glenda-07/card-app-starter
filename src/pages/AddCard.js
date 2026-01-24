@@ -25,6 +25,7 @@ export default function AddCard() {
     try {
       const res = await addCard(card);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      alert("Card added successfully!");
       navigate("/cards");
     } catch (err) {
       console.error(err);

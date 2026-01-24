@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { getCards, deleteCard } from "../services/api";
 
+
 export default function CardList() {
   /* TODO: Complete the CardList page
     - display a list of cards (use the Card component to display each card)
@@ -40,7 +41,7 @@ export default function CardList() {
       // delete from backend
       const res = await deleteCard(card.id);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+      alert("Card deleted successfully!");
       // remove from local state
       setCards((prevCards) => prevCards.filter((c) => c.id !== card.id));
     } catch (error) {
@@ -53,7 +54,7 @@ export default function CardList() {
 
   return (
     <main>
-      <div>
+      <div className="card-grid">
         {cards.map((card) => (
           <Card
             key={card.id}

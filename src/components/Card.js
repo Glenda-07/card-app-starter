@@ -14,8 +14,8 @@ export default function Card({ card, onDelete, busy }) {
       <img src={card.card_pic} alt={card.card_name} />
       <h2>{card.card_name}</h2>
       <p>ID: {card.id}</p>
-      <Link to={`/cards/${card.id}/edit`}>Edit</Link>
-      <button onClick={() => onDelete(card)}>Delete</button>
+      <Link to={`/cards/${card.id}/edit`} className="btn secondary">Edit</Link>
+      <button onClick={() => onDelete(card)} className="btn danger">Delete</button>
     </div>
   );
 }
