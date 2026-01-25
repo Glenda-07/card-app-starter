@@ -1,4 +1,4 @@
-import { useEffect, useState ,alert } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CardForm from "../components/CardForm";
 import { getCards, updateCard } from "../services/api";
