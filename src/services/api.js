@@ -47,14 +47,10 @@ export async function addCard(card) {
 }
 
 export async function updateCard(card) {
-  const res = await fetch(`${API_URL}/editcard`, {
+  const res = await fetch(`${API_URL}/updatecard/${card.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      card_id: card.id,          
-      card_name: card.card_name,
-      card_pic: card.card_pic,
-    }),
+    body: JSON.stringify(card),
   });
 
   if (!res.ok) {
@@ -63,7 +59,6 @@ export async function updateCard(card) {
   }
   return res.json();
 }
-
 
 
 export function deleteCard(id) {

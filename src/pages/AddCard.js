@@ -29,8 +29,7 @@ export default function AddCard() {
     setBusy(true);
     setError("");
     try {
-      const res = await addCard(card);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await addCard(card);
       alert("Card added successfully!");
       navigate("/cards");
     } catch (err) {
