@@ -7,6 +7,11 @@
  */
 const API_URL = process.env.REACT_APP_API_URL || "";
 
+function authHeader() {
+  const token = localStorage.getItem("token");
+  return token ? {Authorization: `Bearer ${token}`} : {};
+}
+
 /**
  * TODO: If your backend routes differ, update the paths here.
  * Required endpoints:
@@ -15,6 +20,14 @@ const API_URL = process.env.REACT_APP_API_URL || "";
  * - PUT    /updatecard/:id
  * - DELETE /deletecard/:id
  */
+
+export async function login(credentials) {
+  return fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials),
+  })
+}
 
 export async function getCards() {
   // GET /allcards (provided as reference)
@@ -26,7 +39,7 @@ export async function getCards() {
 export async function addCard(card) {
   const res = await fetch(`${API_URL}/addcard`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...authHeader() },
     body: JSON.stringify(card),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -48,7 +61,6 @@ export async function updateCard(card) {
     const msg = await res.text();
     throw new Error(`Failed to update card: ${res.status} ${msg}`);
   }
-
   return res.json();
 }
 
