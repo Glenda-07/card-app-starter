@@ -65,5 +65,6 @@ export function deleteCard(id) {
   // TODO: implement DELETE /deletecard/:id
   return fetch(`${API_URL}/deletecard/${id}`, {
     method: "DELETE",
+    headers: { ...authHeader() }
   });
 }

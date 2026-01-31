@@ -1,13 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   /* TODO: Complete the navbar 
     - add links to CardList and AddCard pages 
     - style as a navbar UI */
   const token = localStorage.getItem("token");
   function handleLogout() {
     localStorage.removeItem("token");
-    window.location.href = "/"
+    navigate("/");
   }
 
   return (
